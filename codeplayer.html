@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>CodePlayer</title>
+	<style type="text/css">
+		header
+		{
+			width: 100%;
+			border-bottom: 1px solid #eee;
+			padding: 5px;
+		}
+		#logo
+		{
+			font-family: verdana;
+			font-size: 16px;
+			width: 200px;
+			padding: 5px 5px 5px 15px;
+			border: 1px solid #000;
+			background-color: #000;
+			color: #ffc800;
+		}
+		textarea
+		{
+			width: 100%;
+			resize: none;
+		}
+		iframe
+		{
+			width: 100%;
+			border: 1px solid grey;
+		}
+	
+	.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    position: relative;
+    padding-right: 0px;
+    padding-left: 0px;
+		}
+		.name
+		{
+			width: 100%;
+			height: auto;
+			padding: 4px;
+			font-size: 12px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<header>
+	<div class="container">
+		<div class="col-lg-4 col-md-4">
+		<p id="logo">CodePlayer</p>
+		</div>
+		<div class="col-lg-8 col-md-8" style="float: right;">
+		<button class="btn btn-info" id="html">HTML</button>
+		<button class="btn btn-info" id="css">CSS</button>
+		<button class="btn btn-info" id="js">JS</button>
+		<button class="btn btn-info" id="output">Output</button>
+		</div>
+	</div>
+</header>
+<div class="container-wrap">
+	<div class="col-lg-4 col-md-4">
+		<div class="name">HTML</div>
+		<textarea id="htmlPanel"></textarea>
+	</div>
+	<div class="col-lg-4 col-md-4">
+		<div class="name">CSS</div>
+		<textarea id="cssPanel"></textarea>
+	</div>
+	<div class="col-lg-4 col-md-4" style="display: none;">
+		<textarea id="jsPanel">Hello JS</textarea>
+	</div>
+	<div class="col-lg-4 col-md-4">
+		<div class="name">Output</div>
+		<iframe src="" id="outputPanel"></iframe>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function updateOutput()
+	{
+		$("iframe").contents().find("html").html("<html><head><style type='text/css'>" + $("#cssPanel").val() + "</style></head><body>" + $("#htmlPanel").val() + "</body></html>");
+	}
+	$("textarea").height($(window).height() - $("header").height() - 42);
+
+	$("iframe").height($(window).height() - $("header").height() - 38);
+	$("textarea").on('change keyup paste', function(){
+			updateOutput();
+		});
+</script>
+</body>
+</html>
+
